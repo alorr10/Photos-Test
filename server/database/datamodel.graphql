@@ -1,0 +1,76 @@
+type User {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  email: String
+  username: String @unique
+  birthday: String
+  phoneNumber: String! @unique
+  isClaimed: Boolean! @default(value: true)
+  playerId: String
+  sentBrightens: [Brighten!]! @relation(name: "SenderOfBrighten")
+  receivedBrightens: [Brighten!]! @relation(name: "ReceiverOfBrighten")
+  customCompliments: [Compliment!]! @relation(name: "ComplimentCreator")
+  friends: [User!]! @relation(name: "Friends")
+  permission: Permission @relation(name: "PermissionsForUser")
+}
+
+type Compliment {
+  id: ID! @unique
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  creator: User @relation(name: "ComplimentCreator")
+  brightens: [Brighten!]! @relation(name: "ComplimentOnBrighten")
+  category: ComplimentCategory! @default(value: CUSTOM)
+}
+
+type Brighten {
+  id: ID! @unique
+  compliment: Compliment! @relation(name: "ComplimentOnBrighten")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  receiverHasSmiled: Boolean! @default(value: false)
+  sender: User! @relation(name: "SenderOfBrighten")
+  receiver: User! @relation(name: "ReceiverOfBrighten")
+  opened: Boolean! @default(value: false)
+  isReply: Boolean! @default(value: false)
+  picture: Picture @relation(name: "PictureOnBrighten")
+}
+
+type Picture {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  filename: String!
+  localSource: String!
+  uploadUri: String
+  bucket: String
+  key: String
+  region: String
+  brighten: [Brighten!]! @relation(name: "PictureOnBrighten")
+}
+
+type World {
+  id: ID! @unique
+  interval: Int
+  emotionApiToken: String
+  cantSendComplimentText: String!
+  emotionEndpoint: String
+  pushToken: String
+  stanSayings: [String!]
+}
+
+type Permission {
+  id: ID! @unique
+  user: User! @relation(name: "PermissionsForUser")
+  smileCity: Boolean! @default(value: false)
+}
+
+enum ComplimentCategory {
+  NAUGHTY
+  NICE
+  CUSTOM
+  INVALID
+}

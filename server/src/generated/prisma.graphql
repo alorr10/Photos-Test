@@ -1,0 +1,3610 @@
+# source: https://photos-95142.herokuapp.com
+# timestamp: Mon Jul 16 2018 18:06:19 GMT-0700 (Pacific Daylight Time)
+
+type AggregateBrighten {
+  count: Int!
+}
+
+type AggregateCompliment {
+  count: Int!
+}
+
+type AggregatePermission {
+  count: Int!
+}
+
+type AggregatePicture {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type AggregateWorld {
+  count: Int!
+}
+
+type BatchPayload {
+  """
+  The number of nodes that have been affected by the Batch operation.
+  """
+  count: Long!
+}
+
+type Brighten implements Node {
+  id: ID!
+  compliment(where: ComplimentWhereInput): Compliment!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  receiverHasSmiled: Boolean!
+  sender(where: UserWhereInput): User!
+  receiver(where: UserWhereInput): User!
+  opened: Boolean!
+  isReply: Boolean!
+  picture(where: PictureWhereInput): Picture
+}
+
+"""
+A connection to a list of items.
+"""
+type BrightenConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [BrightenEdge]!
+  aggregate: AggregateBrighten!
+}
+
+input BrightenCreateInput {
+  receiverHasSmiled: Boolean
+  opened: Boolean
+  isReply: Boolean
+  compliment: ComplimentCreateOneWithoutBrightensInput!
+  sender: UserCreateOneWithoutSentBrightensInput!
+  receiver: UserCreateOneWithoutReceivedBrightensInput!
+  picture: PictureCreateOneWithoutBrightenInput
+}
+
+input BrightenCreateManyWithoutComplimentInput {
+  create: [BrightenCreateWithoutComplimentInput!]
+  connect: [BrightenWhereUniqueInput!]
+}
+
+input BrightenCreateManyWithoutPictureInput {
+  create: [BrightenCreateWithoutPictureInput!]
+  connect: [BrightenWhereUniqueInput!]
+}
+
+input BrightenCreateManyWithoutReceiverInput {
+  create: [BrightenCreateWithoutReceiverInput!]
+  connect: [BrightenWhereUniqueInput!]
+}
+
+input BrightenCreateManyWithoutSenderInput {
+  create: [BrightenCreateWithoutSenderInput!]
+  connect: [BrightenWhereUniqueInput!]
+}
+
+input BrightenCreateWithoutComplimentInput {
+  receiverHasSmiled: Boolean
+  opened: Boolean
+  isReply: Boolean
+  sender: UserCreateOneWithoutSentBrightensInput!
+  receiver: UserCreateOneWithoutReceivedBrightensInput!
+  picture: PictureCreateOneWithoutBrightenInput
+}
+
+input BrightenCreateWithoutPictureInput {
+  receiverHasSmiled: Boolean
+  opened: Boolean
+  isReply: Boolean
+  compliment: ComplimentCreateOneWithoutBrightensInput!
+  sender: UserCreateOneWithoutSentBrightensInput!
+  receiver: UserCreateOneWithoutReceivedBrightensInput!
+}
+
+input BrightenCreateWithoutReceiverInput {
+  receiverHasSmiled: Boolean
+  opened: Boolean
+  isReply: Boolean
+  compliment: ComplimentCreateOneWithoutBrightensInput!
+  sender: UserCreateOneWithoutSentBrightensInput!
+  picture: PictureCreateOneWithoutBrightenInput
+}
+
+input BrightenCreateWithoutSenderInput {
+  receiverHasSmiled: Boolean
+  opened: Boolean
+  isReply: Boolean
+  compliment: ComplimentCreateOneWithoutBrightensInput!
+  receiver: UserCreateOneWithoutReceivedBrightensInput!
+  picture: PictureCreateOneWithoutBrightenInput
+}
+
+"""
+An edge in a connection.
+"""
+type BrightenEdge {
+  """
+  The item at the end of the edge.
+  """
+  node: Brighten!
+
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+}
+
+enum BrightenOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  receiverHasSmiled_ASC
+  receiverHasSmiled_DESC
+  opened_ASC
+  opened_DESC
+  isReply_ASC
+  isReply_DESC
+}
+
+type BrightenPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  receiverHasSmiled: Boolean!
+  opened: Boolean!
+  isReply: Boolean!
+}
+
+type BrightenSubscriptionPayload {
+  mutation: MutationType!
+  node: Brighten
+  updatedFields: [String!]
+  previousValues: BrightenPreviousValues
+}
+
+input BrightenSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [BrightenSubscriptionWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [BrightenSubscriptionWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [BrightenSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: BrightenWhereInput
+}
+
+input BrightenUpdateInput {
+  receiverHasSmiled: Boolean
+  opened: Boolean
+  isReply: Boolean
+  compliment: ComplimentUpdateOneWithoutBrightensInput
+  sender: UserUpdateOneWithoutSentBrightensInput
+  receiver: UserUpdateOneWithoutReceivedBrightensInput
+  picture: PictureUpdateOneWithoutBrightenInput
+}
+
+input BrightenUpdateManyWithoutComplimentInput {
+  create: [BrightenCreateWithoutComplimentInput!]
+  connect: [BrightenWhereUniqueInput!]
+  disconnect: [BrightenWhereUniqueInput!]
+  delete: [BrightenWhereUniqueInput!]
+  update: [BrightenUpdateWithWhereUniqueWithoutComplimentInput!]
+  upsert: [BrightenUpsertWithWhereUniqueWithoutComplimentInput!]
+}
+
+input BrightenUpdateManyWithoutPictureInput {
+  create: [BrightenCreateWithoutPictureInput!]
+  connect: [BrightenWhereUniqueInput!]
+  disconnect: [BrightenWhereUniqueInput!]
+  delete: [BrightenWhereUniqueInput!]
+  update: [BrightenUpdateWithWhereUniqueWithoutPictureInput!]
+  upsert: [BrightenUpsertWithWhereUniqueWithoutPictureInput!]
+}
+
+input BrightenUpdateManyWithoutReceiverInput {
+  create: [BrightenCreateWithoutReceiverInput!]
+  connect: [BrightenWhereUniqueInput!]
+  disconnect: [BrightenWhereUniqueInput!]
+  delete: [BrightenWhereUniqueInput!]
+  update: [BrightenUpdateWithWhereUniqueWithoutReceiverInput!]
+  upsert: [BrightenUpsertWithWhereUniqueWithoutReceiverInput!]
+}
+
+input BrightenUpdateManyWithoutSenderInput {
+  create: [BrightenCreateWithoutSenderInput!]
+  connect: [BrightenWhereUniqueInput!]
+  disconnect: [BrightenWhereUniqueInput!]
+  delete: [BrightenWhereUniqueInput!]
+  update: [BrightenUpdateWithWhereUniqueWithoutSenderInput!]
+  upsert: [BrightenUpsertWithWhereUniqueWithoutSenderInput!]
+}
+
+input BrightenUpdateWithoutComplimentDataInput {
+  receiverHasSmiled: Boolean
+  opened: Boolean
+  isReply: Boolean
+  sender: UserUpdateOneWithoutSentBrightensInput
+  receiver: UserUpdateOneWithoutReceivedBrightensInput
+  picture: PictureUpdateOneWithoutBrightenInput
+}
+
+input BrightenUpdateWithoutPictureDataInput {
+  receiverHasSmiled: Boolean
+  opened: Boolean
+  isReply: Boolean
+  compliment: ComplimentUpdateOneWithoutBrightensInput
+  sender: UserUpdateOneWithoutSentBrightensInput
+  receiver: UserUpdateOneWithoutReceivedBrightensInput
+}
+
+input BrightenUpdateWithoutReceiverDataInput {
+  receiverHasSmiled: Boolean
+  opened: Boolean
+  isReply: Boolean
+  compliment: ComplimentUpdateOneWithoutBrightensInput
+  sender: UserUpdateOneWithoutSentBrightensInput
+  picture: PictureUpdateOneWithoutBrightenInput
+}
+
+input BrightenUpdateWithoutSenderDataInput {
+  receiverHasSmiled: Boolean
+  opened: Boolean
+  isReply: Boolean
+  compliment: ComplimentUpdateOneWithoutBrightensInput
+  receiver: UserUpdateOneWithoutReceivedBrightensInput
+  picture: PictureUpdateOneWithoutBrightenInput
+}
+
+input BrightenUpdateWithWhereUniqueWithoutComplimentInput {
+  where: BrightenWhereUniqueInput!
+  data: BrightenUpdateWithoutComplimentDataInput!
+}
+
+input BrightenUpdateWithWhereUniqueWithoutPictureInput {
+  where: BrightenWhereUniqueInput!
+  data: BrightenUpdateWithoutPictureDataInput!
+}
+
+input BrightenUpdateWithWhereUniqueWithoutReceiverInput {
+  where: BrightenWhereUniqueInput!
+  data: BrightenUpdateWithoutReceiverDataInput!
+}
+
+input BrightenUpdateWithWhereUniqueWithoutSenderInput {
+  where: BrightenWhereUniqueInput!
+  data: BrightenUpdateWithoutSenderDataInput!
+}
+
+input BrightenUpsertWithWhereUniqueWithoutComplimentInput {
+  where: BrightenWhereUniqueInput!
+  update: BrightenUpdateWithoutComplimentDataInput!
+  create: BrightenCreateWithoutComplimentInput!
+}
+
+input BrightenUpsertWithWhereUniqueWithoutPictureInput {
+  where: BrightenWhereUniqueInput!
+  update: BrightenUpdateWithoutPictureDataInput!
+  create: BrightenCreateWithoutPictureInput!
+}
+
+input BrightenUpsertWithWhereUniqueWithoutReceiverInput {
+  where: BrightenWhereUniqueInput!
+  update: BrightenUpdateWithoutReceiverDataInput!
+  create: BrightenCreateWithoutReceiverInput!
+}
+
+input BrightenUpsertWithWhereUniqueWithoutSenderInput {
+  where: BrightenWhereUniqueInput!
+  update: BrightenUpdateWithoutSenderDataInput!
+  create: BrightenCreateWithoutSenderInput!
+}
+
+input BrightenWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [BrightenWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [BrightenWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [BrightenWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """
+  All values that are not equal to given value.
+  """
+  createdAt_not: DateTime
+
+  """
+  All values that are contained in given list.
+  """
+  createdAt_in: [DateTime!]
+
+  """
+  All values that are not contained in given list.
+  """
+  createdAt_not_in: [DateTime!]
+
+  """
+  All values less than the given value.
+  """
+  createdAt_lt: DateTime
+
+  """
+  All values less than or equal the given value.
+  """
+  createdAt_lte: DateTime
+
+  """
+  All values greater than the given value.
+  """
+  createdAt_gt: DateTime
+
+  """
+  All values greater than or equal the given value.
+  """
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """
+  All values that are not equal to given value.
+  """
+  updatedAt_not: DateTime
+
+  """
+  All values that are contained in given list.
+  """
+  updatedAt_in: [DateTime!]
+
+  """
+  All values that are not contained in given list.
+  """
+  updatedAt_not_in: [DateTime!]
+
+  """
+  All values less than the given value.
+  """
+  updatedAt_lt: DateTime
+
+  """
+  All values less than or equal the given value.
+  """
+  updatedAt_lte: DateTime
+
+  """
+  All values greater than the given value.
+  """
+  updatedAt_gt: DateTime
+
+  """
+  All values greater than or equal the given value.
+  """
+  updatedAt_gte: DateTime
+  receiverHasSmiled: Boolean
+
+  """
+  All values that are not equal to given value.
+  """
+  receiverHasSmiled_not: Boolean
+  opened: Boolean
+
+  """
+  All values that are not equal to given value.
+  """
+  opened_not: Boolean
+  isReply: Boolean
+
+  """
+  All values that are not equal to given value.
+  """
+  isReply_not: Boolean
+  compliment: ComplimentWhereInput
+  sender: UserWhereInput
+  receiver: UserWhereInput
+  picture: PictureWhereInput
+}
+
+input BrightenWhereUniqueInput {
+  id: ID
+}
+
+type Compliment implements Node {
+  id: ID!
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  creator(where: UserWhereInput): User
+  brightens(
+    where: BrightenWhereInput
+    orderBy: BrightenOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Brighten!]
+  category: ComplimentCategory!
+}
+
+enum ComplimentCategory {
+  NAUGHTY
+  NICE
+  CUSTOM
+  INVALID
+}
+
+"""
+A connection to a list of items.
+"""
+type ComplimentConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [ComplimentEdge]!
+  aggregate: AggregateCompliment!
+}
+
+input ComplimentCreateInput {
+  text: String!
+  category: ComplimentCategory
+  creator: UserCreateOneWithoutCustomComplimentsInput
+  brightens: BrightenCreateManyWithoutComplimentInput
+}
+
+input ComplimentCreateManyWithoutCreatorInput {
+  create: [ComplimentCreateWithoutCreatorInput!]
+  connect: [ComplimentWhereUniqueInput!]
+}
+
+input ComplimentCreateOneWithoutBrightensInput {
+  create: ComplimentCreateWithoutBrightensInput
+  connect: ComplimentWhereUniqueInput
+}
+
+input ComplimentCreateWithoutBrightensInput {
+  text: String!
+  category: ComplimentCategory
+  creator: UserCreateOneWithoutCustomComplimentsInput
+}
+
+input ComplimentCreateWithoutCreatorInput {
+  text: String!
+  category: ComplimentCategory
+  brightens: BrightenCreateManyWithoutComplimentInput
+}
+
+"""
+An edge in a connection.
+"""
+type ComplimentEdge {
+  """
+  The item at the end of the edge.
+  """
+  node: Compliment!
+
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+}
+
+enum ComplimentOrderByInput {
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  category_ASC
+  category_DESC
+}
+
+type ComplimentPreviousValues {
+  id: ID!
+  text: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  category: ComplimentCategory!
+}
+
+type ComplimentSubscriptionPayload {
+  mutation: MutationType!
+  node: Compliment
+  updatedFields: [String!]
+  previousValues: ComplimentPreviousValues
+}
+
+input ComplimentSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [ComplimentSubscriptionWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [ComplimentSubscriptionWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [ComplimentSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ComplimentWhereInput
+}
+
+input ComplimentUpdateInput {
+  text: String
+  category: ComplimentCategory
+  creator: UserUpdateOneWithoutCustomComplimentsInput
+  brightens: BrightenUpdateManyWithoutComplimentInput
+}
+
+input ComplimentUpdateManyWithoutCreatorInput {
+  create: [ComplimentCreateWithoutCreatorInput!]
+  connect: [ComplimentWhereUniqueInput!]
+  disconnect: [ComplimentWhereUniqueInput!]
+  delete: [ComplimentWhereUniqueInput!]
+  update: [ComplimentUpdateWithWhereUniqueWithoutCreatorInput!]
+  upsert: [ComplimentUpsertWithWhereUniqueWithoutCreatorInput!]
+}
+
+input ComplimentUpdateOneWithoutBrightensInput {
+  create: ComplimentCreateWithoutBrightensInput
+  connect: ComplimentWhereUniqueInput
+  delete: Boolean
+  update: ComplimentUpdateWithoutBrightensDataInput
+  upsert: ComplimentUpsertWithoutBrightensInput
+}
+
+input ComplimentUpdateWithoutBrightensDataInput {
+  text: String
+  category: ComplimentCategory
+  creator: UserUpdateOneWithoutCustomComplimentsInput
+}
+
+input ComplimentUpdateWithoutCreatorDataInput {
+  text: String
+  category: ComplimentCategory
+  brightens: BrightenUpdateManyWithoutComplimentInput
+}
+
+input ComplimentUpdateWithWhereUniqueWithoutCreatorInput {
+  where: ComplimentWhereUniqueInput!
+  data: ComplimentUpdateWithoutCreatorDataInput!
+}
+
+input ComplimentUpsertWithoutBrightensInput {
+  update: ComplimentUpdateWithoutBrightensDataInput!
+  create: ComplimentCreateWithoutBrightensInput!
+}
+
+input ComplimentUpsertWithWhereUniqueWithoutCreatorInput {
+  where: ComplimentWhereUniqueInput!
+  update: ComplimentUpdateWithoutCreatorDataInput!
+  create: ComplimentCreateWithoutCreatorInput!
+}
+
+input ComplimentWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [ComplimentWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [ComplimentWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [ComplimentWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  text: String
+
+  """
+  All values that are not equal to given value.
+  """
+  text_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  text_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  text_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  text_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  text_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  text_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  text_gte: String
+
+  """
+  All values containing the given string.
+  """
+  text_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  text_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  text_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  text_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  text_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  text_not_ends_with: String
+  createdAt: DateTime
+
+  """
+  All values that are not equal to given value.
+  """
+  createdAt_not: DateTime
+
+  """
+  All values that are contained in given list.
+  """
+  createdAt_in: [DateTime!]
+
+  """
+  All values that are not contained in given list.
+  """
+  createdAt_not_in: [DateTime!]
+
+  """
+  All values less than the given value.
+  """
+  createdAt_lt: DateTime
+
+  """
+  All values less than or equal the given value.
+  """
+  createdAt_lte: DateTime
+
+  """
+  All values greater than the given value.
+  """
+  createdAt_gt: DateTime
+
+  """
+  All values greater than or equal the given value.
+  """
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """
+  All values that are not equal to given value.
+  """
+  updatedAt_not: DateTime
+
+  """
+  All values that are contained in given list.
+  """
+  updatedAt_in: [DateTime!]
+
+  """
+  All values that are not contained in given list.
+  """
+  updatedAt_not_in: [DateTime!]
+
+  """
+  All values less than the given value.
+  """
+  updatedAt_lt: DateTime
+
+  """
+  All values less than or equal the given value.
+  """
+  updatedAt_lte: DateTime
+
+  """
+  All values greater than the given value.
+  """
+  updatedAt_gt: DateTime
+
+  """
+  All values greater than or equal the given value.
+  """
+  updatedAt_gte: DateTime
+  category: ComplimentCategory
+
+  """
+  All values that are not equal to given value.
+  """
+  category_not: ComplimentCategory
+
+  """
+  All values that are contained in given list.
+  """
+  category_in: [ComplimentCategory!]
+
+  """
+  All values that are not contained in given list.
+  """
+  category_not_in: [ComplimentCategory!]
+  creator: UserWhereInput
+  brightens_every: BrightenWhereInput
+  brightens_some: BrightenWhereInput
+  brightens_none: BrightenWhereInput
+}
+
+input ComplimentWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createCompliment(data: ComplimentCreateInput!): Compliment!
+  createBrighten(data: BrightenCreateInput!): Brighten!
+  createPicture(data: PictureCreateInput!): Picture!
+  createWorld(data: WorldCreateInput!): World!
+  createPermission(data: PermissionCreateInput!): Permission!
+  createUser(data: UserCreateInput!): User!
+  updateCompliment(data: ComplimentUpdateInput!, where: ComplimentWhereUniqueInput!): Compliment
+  updateBrighten(data: BrightenUpdateInput!, where: BrightenWhereUniqueInput!): Brighten
+  updatePicture(data: PictureUpdateInput!, where: PictureWhereUniqueInput!): Picture
+  updateWorld(data: WorldUpdateInput!, where: WorldWhereUniqueInput!): World
+  updatePermission(data: PermissionUpdateInput!, where: PermissionWhereUniqueInput!): Permission
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  deleteCompliment(where: ComplimentWhereUniqueInput!): Compliment
+  deleteBrighten(where: BrightenWhereUniqueInput!): Brighten
+  deletePicture(where: PictureWhereUniqueInput!): Picture
+  deleteWorld(where: WorldWhereUniqueInput!): World
+  deletePermission(where: PermissionWhereUniqueInput!): Permission
+  deleteUser(where: UserWhereUniqueInput!): User
+  upsertCompliment(
+    where: ComplimentWhereUniqueInput!
+    create: ComplimentCreateInput!
+    update: ComplimentUpdateInput!
+  ): Compliment!
+  upsertBrighten(
+    where: BrightenWhereUniqueInput!
+    create: BrightenCreateInput!
+    update: BrightenUpdateInput!
+  ): Brighten!
+  upsertPicture(
+    where: PictureWhereUniqueInput!
+    create: PictureCreateInput!
+    update: PictureUpdateInput!
+  ): Picture!
+  upsertWorld(
+    where: WorldWhereUniqueInput!
+    create: WorldCreateInput!
+    update: WorldUpdateInput!
+  ): World!
+  upsertPermission(
+    where: PermissionWhereUniqueInput!
+    create: PermissionCreateInput!
+    update: PermissionUpdateInput!
+  ): Permission!
+  upsertUser(
+    where: UserWhereUniqueInput!
+    create: UserCreateInput!
+    update: UserUpdateInput!
+  ): User!
+  updateManyCompliments(data: ComplimentUpdateInput!, where: ComplimentWhereInput): BatchPayload!
+  updateManyBrightens(data: BrightenUpdateInput!, where: BrightenWhereInput): BatchPayload!
+  updateManyPictures(data: PictureUpdateInput!, where: PictureWhereInput): BatchPayload!
+  updateManyWorlds(data: WorldUpdateInput!, where: WorldWhereInput): BatchPayload!
+  updateManyPermissions(data: PermissionUpdateInput!, where: PermissionWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  deleteManyCompliments(where: ComplimentWhereInput): BatchPayload!
+  deleteManyBrightens(where: BrightenWhereInput): BatchPayload!
+  deleteManyPictures(where: PictureWhereInput): BatchPayload!
+  deleteManyWorlds(where: WorldWhereInput): BatchPayload!
+  deleteManyPermissions(where: PermissionWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""
+An object with an ID
+"""
+interface Node {
+  """
+  The id of the object.
+  """
+  id: ID!
+}
+
+"""
+Information about pagination in a connection.
+"""
+type PageInfo {
+  """
+  When paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+
+  """
+  When paginating backwards, are there more items?
+  """
+  hasPreviousPage: Boolean!
+
+  """
+  When paginating backwards, the cursor to continue.
+  """
+  startCursor: String
+
+  """
+  When paginating forwards, the cursor to continue.
+  """
+  endCursor: String
+}
+
+type Permission implements Node {
+  id: ID!
+  user(where: UserWhereInput): User!
+  smileCity: Boolean!
+}
+
+"""
+A connection to a list of items.
+"""
+type PermissionConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [PermissionEdge]!
+  aggregate: AggregatePermission!
+}
+
+input PermissionCreateInput {
+  smileCity: Boolean
+  user: UserCreateOneWithoutPermissionInput!
+}
+
+input PermissionCreateOneWithoutUserInput {
+  create: PermissionCreateWithoutUserInput
+  connect: PermissionWhereUniqueInput
+}
+
+input PermissionCreateWithoutUserInput {
+  smileCity: Boolean
+}
+
+"""
+An edge in a connection.
+"""
+type PermissionEdge {
+  """
+  The item at the end of the edge.
+  """
+  node: Permission!
+
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+}
+
+enum PermissionOrderByInput {
+  id_ASC
+  id_DESC
+  smileCity_ASC
+  smileCity_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type PermissionPreviousValues {
+  id: ID!
+  smileCity: Boolean!
+}
+
+type PermissionSubscriptionPayload {
+  mutation: MutationType!
+  node: Permission
+  updatedFields: [String!]
+  previousValues: PermissionPreviousValues
+}
+
+input PermissionSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [PermissionSubscriptionWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [PermissionSubscriptionWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [PermissionSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PermissionWhereInput
+}
+
+input PermissionUpdateInput {
+  smileCity: Boolean
+  user: UserUpdateOneWithoutPermissionInput
+}
+
+input PermissionUpdateOneWithoutUserInput {
+  create: PermissionCreateWithoutUserInput
+  connect: PermissionWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: PermissionUpdateWithoutUserDataInput
+  upsert: PermissionUpsertWithoutUserInput
+}
+
+input PermissionUpdateWithoutUserDataInput {
+  smileCity: Boolean
+}
+
+input PermissionUpsertWithoutUserInput {
+  update: PermissionUpdateWithoutUserDataInput!
+  create: PermissionCreateWithoutUserInput!
+}
+
+input PermissionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [PermissionWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [PermissionWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [PermissionWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  smileCity: Boolean
+
+  """
+  All values that are not equal to given value.
+  """
+  smileCity_not: Boolean
+  user: UserWhereInput
+}
+
+input PermissionWhereUniqueInput {
+  id: ID
+}
+
+type Picture implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  contentType: String
+  name: String
+  secret: String
+  size: Int
+  url: String
+  brighten(
+    where: BrightenWhereInput
+    orderBy: BrightenOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Brighten!]
+}
+
+"""
+A connection to a list of items.
+"""
+type PictureConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [PictureEdge]!
+  aggregate: AggregatePicture!
+}
+
+input PictureCreateInput {
+  contentType: String
+  name: String
+  secret: String
+  size: Int
+  url: String
+  brighten: BrightenCreateManyWithoutPictureInput
+}
+
+input PictureCreateOneWithoutBrightenInput {
+  create: PictureCreateWithoutBrightenInput
+  connect: PictureWhereUniqueInput
+}
+
+input PictureCreateWithoutBrightenInput {
+  contentType: String
+  name: String
+  secret: String
+  size: Int
+  url: String
+}
+
+"""
+An edge in a connection.
+"""
+type PictureEdge {
+  """
+  The item at the end of the edge.
+  """
+  node: Picture!
+
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+}
+
+enum PictureOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  contentType_ASC
+  contentType_DESC
+  name_ASC
+  name_DESC
+  secret_ASC
+  secret_DESC
+  size_ASC
+  size_DESC
+  url_ASC
+  url_DESC
+}
+
+type PicturePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  contentType: String
+  name: String
+  secret: String
+  size: Int
+  url: String
+}
+
+type PictureSubscriptionPayload {
+  mutation: MutationType!
+  node: Picture
+  updatedFields: [String!]
+  previousValues: PicturePreviousValues
+}
+
+input PictureSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [PictureSubscriptionWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [PictureSubscriptionWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [PictureSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: PictureWhereInput
+}
+
+input PictureUpdateInput {
+  contentType: String
+  name: String
+  secret: String
+  size: Int
+  url: String
+  brighten: BrightenUpdateManyWithoutPictureInput
+}
+
+input PictureUpdateOneWithoutBrightenInput {
+  create: PictureCreateWithoutBrightenInput
+  connect: PictureWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: PictureUpdateWithoutBrightenDataInput
+  upsert: PictureUpsertWithoutBrightenInput
+}
+
+input PictureUpdateWithoutBrightenDataInput {
+  contentType: String
+  name: String
+  secret: String
+  size: Int
+  url: String
+}
+
+input PictureUpsertWithoutBrightenInput {
+  update: PictureUpdateWithoutBrightenDataInput!
+  create: PictureCreateWithoutBrightenInput!
+}
+
+input PictureWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [PictureWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [PictureWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [PictureWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """
+  All values that are not equal to given value.
+  """
+  createdAt_not: DateTime
+
+  """
+  All values that are contained in given list.
+  """
+  createdAt_in: [DateTime!]
+
+  """
+  All values that are not contained in given list.
+  """
+  createdAt_not_in: [DateTime!]
+
+  """
+  All values less than the given value.
+  """
+  createdAt_lt: DateTime
+
+  """
+  All values less than or equal the given value.
+  """
+  createdAt_lte: DateTime
+
+  """
+  All values greater than the given value.
+  """
+  createdAt_gt: DateTime
+
+  """
+  All values greater than or equal the given value.
+  """
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """
+  All values that are not equal to given value.
+  """
+  updatedAt_not: DateTime
+
+  """
+  All values that are contained in given list.
+  """
+  updatedAt_in: [DateTime!]
+
+  """
+  All values that are not contained in given list.
+  """
+  updatedAt_not_in: [DateTime!]
+
+  """
+  All values less than the given value.
+  """
+  updatedAt_lt: DateTime
+
+  """
+  All values less than or equal the given value.
+  """
+  updatedAt_lte: DateTime
+
+  """
+  All values greater than the given value.
+  """
+  updatedAt_gt: DateTime
+
+  """
+  All values greater than or equal the given value.
+  """
+  updatedAt_gte: DateTime
+  contentType: String
+
+  """
+  All values that are not equal to given value.
+  """
+  contentType_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  contentType_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  contentType_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  contentType_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  contentType_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  contentType_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  contentType_gte: String
+
+  """
+  All values containing the given string.
+  """
+  contentType_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  contentType_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  contentType_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  contentType_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  contentType_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  contentType_not_ends_with: String
+  name: String
+
+  """
+  All values that are not equal to given value.
+  """
+  name_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  name_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  name_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  name_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  name_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  name_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  name_gte: String
+
+  """
+  All values containing the given string.
+  """
+  name_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  name_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  name_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  name_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  name_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  name_not_ends_with: String
+  secret: String
+
+  """
+  All values that are not equal to given value.
+  """
+  secret_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  secret_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  secret_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  secret_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  secret_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  secret_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  secret_gte: String
+
+  """
+  All values containing the given string.
+  """
+  secret_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  secret_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  secret_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  secret_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  secret_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  secret_not_ends_with: String
+  size: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  size_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  size_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  size_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  size_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  size_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  size_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  size_gte: Int
+  url: String
+
+  """
+  All values that are not equal to given value.
+  """
+  url_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  url_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  url_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  url_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  url_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  url_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  url_gte: String
+
+  """
+  All values containing the given string.
+  """
+  url_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  url_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  url_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  url_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  url_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  url_not_ends_with: String
+  brighten_every: BrightenWhereInput
+  brighten_some: BrightenWhereInput
+  brighten_none: BrightenWhereInput
+}
+
+input PictureWhereUniqueInput {
+  id: ID
+  secret: String
+}
+
+type Query {
+  compliments(
+    where: ComplimentWhereInput
+    orderBy: ComplimentOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Compliment]!
+  brightens(
+    where: BrightenWhereInput
+    orderBy: BrightenOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Brighten]!
+  pictures(
+    where: PictureWhereInput
+    orderBy: PictureOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Picture]!
+  worlds(
+    where: WorldWhereInput
+    orderBy: WorldOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [World]!
+  permissions(
+    where: PermissionWhereInput
+    orderBy: PermissionOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Permission]!
+  users(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User]!
+  compliment(where: ComplimentWhereUniqueInput!): Compliment
+  brighten(where: BrightenWhereUniqueInput!): Brighten
+  picture(where: PictureWhereUniqueInput!): Picture
+  world(where: WorldWhereUniqueInput!): World
+  permission(where: PermissionWhereUniqueInput!): Permission
+  user(where: UserWhereUniqueInput!): User
+  complimentsConnection(
+    where: ComplimentWhereInput
+    orderBy: ComplimentOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): ComplimentConnection!
+  brightensConnection(
+    where: BrightenWhereInput
+    orderBy: BrightenOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): BrightenConnection!
+  picturesConnection(
+    where: PictureWhereInput
+    orderBy: PictureOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PictureConnection!
+  worldsConnection(
+    where: WorldWhereInput
+    orderBy: WorldOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): WorldConnection!
+  permissionsConnection(
+    where: PermissionWhereInput
+    orderBy: PermissionOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): PermissionConnection!
+  usersConnection(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): UserConnection!
+
+  """
+  Fetches an object given its ID
+  """
+  node(
+    """
+    The ID of an object
+    """
+    id: ID!
+  ): Node
+}
+
+type Subscription {
+  compliment(where: ComplimentSubscriptionWhereInput): ComplimentSubscriptionPayload
+  brighten(where: BrightenSubscriptionWhereInput): BrightenSubscriptionPayload
+  picture(where: PictureSubscriptionWhereInput): PictureSubscriptionPayload
+  world(where: WorldSubscriptionWhereInput): WorldSubscriptionPayload
+  permission(where: PermissionSubscriptionWhereInput): PermissionSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String!
+  isClaimed: Boolean!
+  playerId: String
+  sentBrightens(
+    where: BrightenWhereInput
+    orderBy: BrightenOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Brighten!]
+  receivedBrightens(
+    where: BrightenWhereInput
+    orderBy: BrightenOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Brighten!]
+  customCompliments(
+    where: ComplimentWhereInput
+    orderBy: ComplimentOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Compliment!]
+  friends(
+    where: UserWhereInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User!]
+  permission(where: PermissionWhereInput): Permission
+}
+
+"""
+A connection to a list of items.
+"""
+type UserConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  name: String!
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String!
+  isClaimed: Boolean
+  playerId: String
+  sentBrightens: BrightenCreateManyWithoutSenderInput
+  receivedBrightens: BrightenCreateManyWithoutReceiverInput
+  customCompliments: ComplimentCreateManyWithoutCreatorInput
+  friends: UserCreateManyInput
+  permission: PermissionCreateOneWithoutUserInput
+}
+
+input UserCreateManyInput {
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateOneWithoutCustomComplimentsInput {
+  create: UserCreateWithoutCustomComplimentsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutPermissionInput {
+  create: UserCreateWithoutPermissionInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutReceivedBrightensInput {
+  create: UserCreateWithoutReceivedBrightensInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutSentBrightensInput {
+  create: UserCreateWithoutSentBrightensInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCustomComplimentsInput {
+  name: String!
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String!
+  isClaimed: Boolean
+  playerId: String
+  sentBrightens: BrightenCreateManyWithoutSenderInput
+  receivedBrightens: BrightenCreateManyWithoutReceiverInput
+  friends: UserCreateManyInput
+  permission: PermissionCreateOneWithoutUserInput
+}
+
+input UserCreateWithoutPermissionInput {
+  name: String!
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String!
+  isClaimed: Boolean
+  playerId: String
+  sentBrightens: BrightenCreateManyWithoutSenderInput
+  receivedBrightens: BrightenCreateManyWithoutReceiverInput
+  customCompliments: ComplimentCreateManyWithoutCreatorInput
+  friends: UserCreateManyInput
+}
+
+input UserCreateWithoutReceivedBrightensInput {
+  name: String!
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String!
+  isClaimed: Boolean
+  playerId: String
+  sentBrightens: BrightenCreateManyWithoutSenderInput
+  customCompliments: ComplimentCreateManyWithoutCreatorInput
+  friends: UserCreateManyInput
+  permission: PermissionCreateOneWithoutUserInput
+}
+
+input UserCreateWithoutSentBrightensInput {
+  name: String!
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String!
+  isClaimed: Boolean
+  playerId: String
+  receivedBrightens: BrightenCreateManyWithoutReceiverInput
+  customCompliments: ComplimentCreateManyWithoutCreatorInput
+  friends: UserCreateManyInput
+  permission: PermissionCreateOneWithoutUserInput
+}
+
+"""
+An edge in a connection.
+"""
+type UserEdge {
+  """
+  The item at the end of the edge.
+  """
+  node: User!
+
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+  username_ASC
+  username_DESC
+  birthday_ASC
+  birthday_DESC
+  phoneNumber_ASC
+  phoneNumber_DESC
+  isClaimed_ASC
+  isClaimed_DESC
+  playerId_ASC
+  playerId_DESC
+}
+
+type UserPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String!
+  isClaimed: Boolean!
+  playerId: String
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [UserSubscriptionWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [UserSubscriptionWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [UserSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateDataInput {
+  name: String
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String
+  isClaimed: Boolean
+  playerId: String
+  sentBrightens: BrightenUpdateManyWithoutSenderInput
+  receivedBrightens: BrightenUpdateManyWithoutReceiverInput
+  customCompliments: ComplimentUpdateManyWithoutCreatorInput
+  friends: UserUpdateManyInput
+  permission: PermissionUpdateOneWithoutUserInput
+}
+
+input UserUpdateInput {
+  name: String
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String
+  isClaimed: Boolean
+  playerId: String
+  sentBrightens: BrightenUpdateManyWithoutSenderInput
+  receivedBrightens: BrightenUpdateManyWithoutReceiverInput
+  customCompliments: ComplimentUpdateManyWithoutCreatorInput
+  friends: UserUpdateManyInput
+  permission: PermissionUpdateOneWithoutUserInput
+}
+
+input UserUpdateManyInput {
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueNestedInput!]
+}
+
+input UserUpdateOneWithoutCustomComplimentsInput {
+  create: UserCreateWithoutCustomComplimentsInput
+  connect: UserWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: UserUpdateWithoutCustomComplimentsDataInput
+  upsert: UserUpsertWithoutCustomComplimentsInput
+}
+
+input UserUpdateOneWithoutPermissionInput {
+  create: UserCreateWithoutPermissionInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutPermissionDataInput
+  upsert: UserUpsertWithoutPermissionInput
+}
+
+input UserUpdateOneWithoutReceivedBrightensInput {
+  create: UserCreateWithoutReceivedBrightensInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutReceivedBrightensDataInput
+  upsert: UserUpsertWithoutReceivedBrightensInput
+}
+
+input UserUpdateOneWithoutSentBrightensInput {
+  create: UserCreateWithoutSentBrightensInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutSentBrightensDataInput
+  upsert: UserUpsertWithoutSentBrightensInput
+}
+
+input UserUpdateWithoutCustomComplimentsDataInput {
+  name: String
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String
+  isClaimed: Boolean
+  playerId: String
+  sentBrightens: BrightenUpdateManyWithoutSenderInput
+  receivedBrightens: BrightenUpdateManyWithoutReceiverInput
+  friends: UserUpdateManyInput
+  permission: PermissionUpdateOneWithoutUserInput
+}
+
+input UserUpdateWithoutPermissionDataInput {
+  name: String
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String
+  isClaimed: Boolean
+  playerId: String
+  sentBrightens: BrightenUpdateManyWithoutSenderInput
+  receivedBrightens: BrightenUpdateManyWithoutReceiverInput
+  customCompliments: ComplimentUpdateManyWithoutCreatorInput
+  friends: UserUpdateManyInput
+}
+
+input UserUpdateWithoutReceivedBrightensDataInput {
+  name: String
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String
+  isClaimed: Boolean
+  playerId: String
+  sentBrightens: BrightenUpdateManyWithoutSenderInput
+  customCompliments: ComplimentUpdateManyWithoutCreatorInput
+  friends: UserUpdateManyInput
+  permission: PermissionUpdateOneWithoutUserInput
+}
+
+input UserUpdateWithoutSentBrightensDataInput {
+  name: String
+  email: String
+  username: String
+  birthday: String
+  phoneNumber: String
+  isClaimed: Boolean
+  playerId: String
+  receivedBrightens: BrightenUpdateManyWithoutReceiverInput
+  customCompliments: ComplimentUpdateManyWithoutCreatorInput
+  friends: UserUpdateManyInput
+  permission: PermissionUpdateOneWithoutUserInput
+}
+
+input UserUpdateWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateDataInput!
+}
+
+input UserUpsertWithoutCustomComplimentsInput {
+  update: UserUpdateWithoutCustomComplimentsDataInput!
+  create: UserCreateWithoutCustomComplimentsInput!
+}
+
+input UserUpsertWithoutPermissionInput {
+  update: UserUpdateWithoutPermissionDataInput!
+  create: UserCreateWithoutPermissionInput!
+}
+
+input UserUpsertWithoutReceivedBrightensInput {
+  update: UserUpdateWithoutReceivedBrightensDataInput!
+  create: UserCreateWithoutReceivedBrightensInput!
+}
+
+input UserUpsertWithoutSentBrightensInput {
+  update: UserUpdateWithoutSentBrightensDataInput!
+  create: UserCreateWithoutSentBrightensInput!
+}
+
+input UserUpsertWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [UserWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [UserWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [UserWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """
+  All values that are not equal to given value.
+  """
+  createdAt_not: DateTime
+
+  """
+  All values that are contained in given list.
+  """
+  createdAt_in: [DateTime!]
+
+  """
+  All values that are not contained in given list.
+  """
+  createdAt_not_in: [DateTime!]
+
+  """
+  All values less than the given value.
+  """
+  createdAt_lt: DateTime
+
+  """
+  All values less than or equal the given value.
+  """
+  createdAt_lte: DateTime
+
+  """
+  All values greater than the given value.
+  """
+  createdAt_gt: DateTime
+
+  """
+  All values greater than or equal the given value.
+  """
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """
+  All values that are not equal to given value.
+  """
+  updatedAt_not: DateTime
+
+  """
+  All values that are contained in given list.
+  """
+  updatedAt_in: [DateTime!]
+
+  """
+  All values that are not contained in given list.
+  """
+  updatedAt_not_in: [DateTime!]
+
+  """
+  All values less than the given value.
+  """
+  updatedAt_lt: DateTime
+
+  """
+  All values less than or equal the given value.
+  """
+  updatedAt_lte: DateTime
+
+  """
+  All values greater than the given value.
+  """
+  updatedAt_gt: DateTime
+
+  """
+  All values greater than or equal the given value.
+  """
+  updatedAt_gte: DateTime
+  name: String
+
+  """
+  All values that are not equal to given value.
+  """
+  name_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  name_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  name_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  name_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  name_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  name_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  name_gte: String
+
+  """
+  All values containing the given string.
+  """
+  name_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  name_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  name_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  name_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  name_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  name_not_ends_with: String
+  email: String
+
+  """
+  All values that are not equal to given value.
+  """
+  email_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  email_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  email_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  email_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  email_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  email_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  email_gte: String
+
+  """
+  All values containing the given string.
+  """
+  email_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  email_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  email_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  email_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  email_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  email_not_ends_with: String
+  username: String
+
+  """
+  All values that are not equal to given value.
+  """
+  username_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  username_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  username_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  username_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  username_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  username_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  username_gte: String
+
+  """
+  All values containing the given string.
+  """
+  username_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  username_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  username_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  username_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  username_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  username_not_ends_with: String
+  birthday: String
+
+  """
+  All values that are not equal to given value.
+  """
+  birthday_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  birthday_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  birthday_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  birthday_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  birthday_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  birthday_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  birthday_gte: String
+
+  """
+  All values containing the given string.
+  """
+  birthday_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  birthday_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  birthday_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  birthday_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  birthday_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  birthday_not_ends_with: String
+  phoneNumber: String
+
+  """
+  All values that are not equal to given value.
+  """
+  phoneNumber_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  phoneNumber_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  phoneNumber_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  phoneNumber_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  phoneNumber_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  phoneNumber_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  phoneNumber_gte: String
+
+  """
+  All values containing the given string.
+  """
+  phoneNumber_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  phoneNumber_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  phoneNumber_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  phoneNumber_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  phoneNumber_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  phoneNumber_not_ends_with: String
+  isClaimed: Boolean
+
+  """
+  All values that are not equal to given value.
+  """
+  isClaimed_not: Boolean
+  playerId: String
+
+  """
+  All values that are not equal to given value.
+  """
+  playerId_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  playerId_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  playerId_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  playerId_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  playerId_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  playerId_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  playerId_gte: String
+
+  """
+  All values containing the given string.
+  """
+  playerId_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  playerId_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  playerId_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  playerId_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  playerId_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  playerId_not_ends_with: String
+  sentBrightens_every: BrightenWhereInput
+  sentBrightens_some: BrightenWhereInput
+  sentBrightens_none: BrightenWhereInput
+  receivedBrightens_every: BrightenWhereInput
+  receivedBrightens_some: BrightenWhereInput
+  receivedBrightens_none: BrightenWhereInput
+  customCompliments_every: ComplimentWhereInput
+  customCompliments_some: ComplimentWhereInput
+  customCompliments_none: ComplimentWhereInput
+  friends_every: UserWhereInput
+  friends_some: UserWhereInput
+  friends_none: UserWhereInput
+  permission: PermissionWhereInput
+  _MagicalBackRelation_Friends_every: UserWhereInput
+  _MagicalBackRelation_Friends_some: UserWhereInput
+  _MagicalBackRelation_Friends_none: UserWhereInput
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  username: String
+  phoneNumber: String
+}
+
+type World implements Node {
+  id: ID!
+  interval: Int
+  emotionApiToken: String
+  cantSendComplimentText: String!
+  emotionEndpoint: String
+  pushToken: String
+  stanSayings: [String!]!
+}
+
+"""
+A connection to a list of items.
+"""
+type WorldConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [WorldEdge]!
+  aggregate: AggregateWorld!
+}
+
+input WorldCreateInput {
+  interval: Int
+  emotionApiToken: String
+  cantSendComplimentText: String!
+  emotionEndpoint: String
+  pushToken: String
+  stanSayings: WorldCreatestanSayingsInput
+}
+
+input WorldCreatestanSayingsInput {
+  set: [String!]
+}
+
+"""
+An edge in a connection.
+"""
+type WorldEdge {
+  """
+  The item at the end of the edge.
+  """
+  node: World!
+
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+}
+
+enum WorldOrderByInput {
+  id_ASC
+  id_DESC
+  interval_ASC
+  interval_DESC
+  emotionApiToken_ASC
+  emotionApiToken_DESC
+  cantSendComplimentText_ASC
+  cantSendComplimentText_DESC
+  emotionEndpoint_ASC
+  emotionEndpoint_DESC
+  pushToken_ASC
+  pushToken_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type WorldPreviousValues {
+  id: ID!
+  interval: Int
+  emotionApiToken: String
+  cantSendComplimentText: String!
+  emotionEndpoint: String
+  pushToken: String
+  stanSayings: [String!]!
+}
+
+type WorldSubscriptionPayload {
+  mutation: MutationType!
+  node: World
+  updatedFields: [String!]
+  previousValues: WorldPreviousValues
+}
+
+input WorldSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [WorldSubscriptionWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [WorldSubscriptionWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [WorldSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: WorldWhereInput
+}
+
+input WorldUpdateInput {
+  interval: Int
+  emotionApiToken: String
+  cantSendComplimentText: String
+  emotionEndpoint: String
+  pushToken: String
+  stanSayings: WorldUpdatestanSayingsInput
+}
+
+input WorldUpdatestanSayingsInput {
+  set: [String!]
+}
+
+input WorldWhereInput {
+  """
+  Logical AND on all given filters.
+  """
+  AND: [WorldWhereInput!]
+
+  """
+  Logical OR on all given filters.
+  """
+  OR: [WorldWhereInput!]
+
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [WorldWhereInput!]
+  id: ID
+
+  """
+  All values that are not equal to given value.
+  """
+  id_not: ID
+
+  """
+  All values that are contained in given list.
+  """
+  id_in: [ID!]
+
+  """
+  All values that are not contained in given list.
+  """
+  id_not_in: [ID!]
+
+  """
+  All values less than the given value.
+  """
+  id_lt: ID
+
+  """
+  All values less than or equal the given value.
+  """
+  id_lte: ID
+
+  """
+  All values greater than the given value.
+  """
+  id_gt: ID
+
+  """
+  All values greater than or equal the given value.
+  """
+  id_gte: ID
+
+  """
+  All values containing the given string.
+  """
+  id_contains: ID
+
+  """
+  All values not containing the given string.
+  """
+  id_not_contains: ID
+
+  """
+  All values starting with the given string.
+  """
+  id_starts_with: ID
+
+  """
+  All values not starting with the given string.
+  """
+  id_not_starts_with: ID
+
+  """
+  All values ending with the given string.
+  """
+  id_ends_with: ID
+
+  """
+  All values not ending with the given string.
+  """
+  id_not_ends_with: ID
+  interval: Int
+
+  """
+  All values that are not equal to given value.
+  """
+  interval_not: Int
+
+  """
+  All values that are contained in given list.
+  """
+  interval_in: [Int!]
+
+  """
+  All values that are not contained in given list.
+  """
+  interval_not_in: [Int!]
+
+  """
+  All values less than the given value.
+  """
+  interval_lt: Int
+
+  """
+  All values less than or equal the given value.
+  """
+  interval_lte: Int
+
+  """
+  All values greater than the given value.
+  """
+  interval_gt: Int
+
+  """
+  All values greater than or equal the given value.
+  """
+  interval_gte: Int
+  emotionApiToken: String
+
+  """
+  All values that are not equal to given value.
+  """
+  emotionApiToken_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  emotionApiToken_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  emotionApiToken_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  emotionApiToken_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  emotionApiToken_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  emotionApiToken_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  emotionApiToken_gte: String
+
+  """
+  All values containing the given string.
+  """
+  emotionApiToken_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  emotionApiToken_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  emotionApiToken_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  emotionApiToken_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  emotionApiToken_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  emotionApiToken_not_ends_with: String
+  cantSendComplimentText: String
+
+  """
+  All values that are not equal to given value.
+  """
+  cantSendComplimentText_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  cantSendComplimentText_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  cantSendComplimentText_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  cantSendComplimentText_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  cantSendComplimentText_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  cantSendComplimentText_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  cantSendComplimentText_gte: String
+
+  """
+  All values containing the given string.
+  """
+  cantSendComplimentText_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  cantSendComplimentText_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  cantSendComplimentText_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  cantSendComplimentText_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  cantSendComplimentText_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  cantSendComplimentText_not_ends_with: String
+  emotionEndpoint: String
+
+  """
+  All values that are not equal to given value.
+  """
+  emotionEndpoint_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  emotionEndpoint_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  emotionEndpoint_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  emotionEndpoint_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  emotionEndpoint_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  emotionEndpoint_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  emotionEndpoint_gte: String
+
+  """
+  All values containing the given string.
+  """
+  emotionEndpoint_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  emotionEndpoint_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  emotionEndpoint_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  emotionEndpoint_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  emotionEndpoint_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  emotionEndpoint_not_ends_with: String
+  pushToken: String
+
+  """
+  All values that are not equal to given value.
+  """
+  pushToken_not: String
+
+  """
+  All values that are contained in given list.
+  """
+  pushToken_in: [String!]
+
+  """
+  All values that are not contained in given list.
+  """
+  pushToken_not_in: [String!]
+
+  """
+  All values less than the given value.
+  """
+  pushToken_lt: String
+
+  """
+  All values less than or equal the given value.
+  """
+  pushToken_lte: String
+
+  """
+  All values greater than the given value.
+  """
+  pushToken_gt: String
+
+  """
+  All values greater than or equal the given value.
+  """
+  pushToken_gte: String
+
+  """
+  All values containing the given string.
+  """
+  pushToken_contains: String
+
+  """
+  All values not containing the given string.
+  """
+  pushToken_not_contains: String
+
+  """
+  All values starting with the given string.
+  """
+  pushToken_starts_with: String
+
+  """
+  All values not starting with the given string.
+  """
+  pushToken_not_starts_with: String
+
+  """
+  All values ending with the given string.
+  """
+  pushToken_ends_with: String
+
+  """
+  All values not ending with the given string.
+  """
+  pushToken_not_ends_with: String
+}
+
+input WorldWhereUniqueInput {
+  id: ID
+}
